@@ -25,21 +25,21 @@
       
      纸上得来总觉浅啊。
      
-       今天上Spring官网看到有个Spring Professional certification exams，我转念一想，在浏览Spring文档前，先看看这里面要
+   今天上Spring官网看到有个Spring Professional certification exams，我转念一想，在浏览Spring文档前，先看看这里面要
        
-     考查的知识点。应该会对后续的学习有点帮助，因此将里面的内容尝试翻译些许。
+ 考查的知识点。应该会对后续的学习有点帮助，因此将里面的内容尝试翻译些许。
      
-     容器,依赖和控制反转
-     - 什么是依赖注入，优点是什么
-     - 接口是什么，在Java中使用接口有什么优点
+ 容器,依赖和控制反转
+ - 什么是依赖注入，优点是什么
+ - 接口是什么，在Java中使用接口有什么优点
      
         为什么推荐它们用于Spring beans
-     - 应用程序上下文是什么意思
-     - 你会怎么创建一个ApplicationContext实例
-     - 你能描述下ApplicationContext中的Spring Bean的生命周期吗
-     - 集成测试环境中你会怎么创建ApplcationContexdt
-     - 关闭一个Application context的首选方式是什么？Spring Boot会做这件事吗
-     - 你能描述下：
+ - 应用程序上下文是什么意思
+ - 怎么创建一个ApplicationContext实例
+ - ApplicationContext中的Spring Bean的生命周期
+ - 集成测试环境中如何创建ApplcationContext
+ - 关闭一个Application context的首选方式是什么？Spring Boot会做这件事吗
+ - 描述下：
         
         使用Java配置实现的依赖注入
         
@@ -48,15 +48,15 @@
         组件扫描，Stereotypes
         
         Spring beans的作用域。默认的作用域是什么
-      - beans默认是预加载还是懒加载的？如何修改这个行为
-      - property source是什么？ 怎么使用@PropertySource
-      - BeanFactoryPostProcessor是什么，它的用途是什么？它何时被调用
+  - beans默认是预加载还是懒加载的？如何修改这个行为
+  - property source是什么？ 怎么使用@PropertySource
+  - BeanFactoryPostProcessor是什么，它的用途是什么？它何时被调用
       
           定义一个静态@Bean方法的理由是？
           
           ProperySourcePlaceholderConfigurer的用途是？
           
-       - BeanPostProcessor是什么？它和BeanFactoryPostProcessor有何不同？它们的用途？它们何时被调用
+  - BeanPostProcessor是什么？它和BeanFactoryPostProcessor有何不同？它们的用途？它们何时被调用
           
           initialization方法的用途，它是如何声明在Spring bean上的
           
@@ -66,15 +66,15 @@
             
             - 还可以怎样为一个Sprinbg Bean定义一个初始化或销毁方法
             
-       - component-scanning的用途是什么
+  - component-scanning的用途是什么
        
-       - 字段注入，构造函数注入和方法注入，@Autowired注解的行为是什么
+  - 字段注入，构造函数注入和方法注入，@Autowired注解的行为是什么
        
-       - 如果要将某个啥注入到一个私有字段，必须做什么？这将会如何影响测试？
+  - 如果要将某个啥注入到一个私有字段，必须做什么？这将会如何影响测试？
        
-       - @Qualifier注解如何结合@Autowired使用
+  - @Qualifier注解如何结合@Autowired使用
        
-       - 代理对象是什么，Spring可以创建的两种不同类型的代理对象是什么？
+  - 代理对象是什么，Spring可以创建的两种不同类型的代理对象是什么？
           
           这两种代理类型的对象各自的限制是什么
           
