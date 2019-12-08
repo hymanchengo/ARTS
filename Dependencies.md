@@ -151,4 +151,66 @@ public class ExampleBean {
     }
  ```
  #### 基于Setter的依赖注入
+ 基于Setter的依赖注入是调用无参构造函数或无参静态工厂方法实例化bean之后，容器在bean上调用setter方法来实现的
+ ```java
+ // 基于Setter方法的依赖注入
+public class SimpleMovieLister {
+    
+    // SimpleMovieLister依赖MovieFinder
+    private MovieFinder movieFinder;
+
+    // Setter方法 Spring容器注入MovieFinder实例
+    public void setMovieFinder(MovieFinder movieFinder) {
+        this.movieFinder = movieFinder;
+    }
+
+    //使用注入的MovieFinder的业务逻辑代码(略)
+}
+ ```
+ ApplicationContext支持其管理的bean基于构造函数和基于Setter方法进行依赖注入。
+ 
+ 它也支持在一些依赖已经通过构造函数方式注入后使用基于Setter的依赖注入
+ 
+ 以BeanDefinition的形式配置依赖，结合PropertyEditor实例将属性从一种格式转换为另一种
+ 
+ 然而，大多数Spring用户不会直接用这些类（就是以编程的方式）,而是用XML bean定义，
+ 
+ 或注解组件（比如使用@Component,@Controller等注解类）,或者在基于Java的@Configuration类里
+ 
+使用@Bean方法。这些来源然后在内部被转换为BeanDefinition的实例，用来加载整个Spring IoC 容器实例。
+      
+      基于构造函数还是Setter方法进行依赖注入?
+      
+      因为可以混合使用基于构造函数和基于setter方法的依赖注入，经验来说使用为强制依赖使用构造函数
+      
+      可选依赖使用setter方法或配置方法。注意，在setter方法上使用@Required注解可使属性成为一个必须依赖。
+      
+      但是最好使用带有参数程序性验证的构造函数依赖注入
+      
+      Spring团队通常提倡使用构造函数方式注入，因为它可以将应用程序组件实现为不可变的对象，
+      
+      并确保所需的依赖项不为null。而且，构造方式注入的组件总是返回给调用者代码完全初始化的状态。
+      
+      题外话，大量构造函数参数是代码坏味，暗示类可能有太多职责，应该被重构以更好地解决关注点分离问题
+      
+      基于Setter注入应该主要只用在可以在类中分配合理默认值的可选依赖。否则，非null检查必须在代码使用
+      
+      依赖的每处地方执行。Setter注入的一个好处是setter方法可使类的对象在以后可以重新配置或重新注入。
+      
+      通过JMX Mbeans进行的管理是一个典型的setter注入使用案例
+      
+      使用对一个特定类最有意义的依赖注入风格，有时处理第三方你没有源码的类，已经不需要你选择了。
+      
+      比如如果第三方类没有暴露任何setter方法，构造注入可能是依赖注入的唯一可用形式。
+      
+- 依赖解析过程
+     容器执行bean的依赖解析如下：
+     
+      
+      
+
+
+
+ 
+ 
 
