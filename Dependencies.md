@@ -62,7 +62,47 @@ public class SimpleMovieLister {
       构造函数参数解析匹配通过使用参数类型进行。如果bean的构造参数中不存在潜在的二义性，
       
       bean构造函数中定义的参数顺序就是实例化bean时提供给合适的构造函数的参数的顺序。
+```java
+package x.y;
 
+public class ThingOne {
+    public ThingOne(ThingTwo thingTwo, ThingThree thingThree) {
+        
+    }
+}
+```
+      假定ThingTwo和ThingThree没有继承关系，没有潜在的二义性存在。以下配置可以正常工作，
+      
+      无需在<constructor-arg>元素中显式地指定构造函数参数索引或者类型
+```xml
+<beans>
+    <bean id="beanOne" class="x.y.ThingOne">
+        <constructor-arg ref="beanTwo"/>
+        <constructor-arg ref="beanThree"/>
+    </bean>
 
+    <bean id="beanTwo" class="x.y.ThingTwo"/>
 
+    <bean id="beanThree" class="x.y.ThingThree"/>
+</beans>
+```
+当另一个bean被引用，已知类型，匹配就会发生。当使用一个简单类型时，比如<value>true</value>。Spring
+不能确定值的类型，不干预的话无法匹配
+```java
+package examples;
+public class ExampleBean {
+    
+    // 计算Ultimate Answer的年数
+    private int years;
+
+    // 生命，宇宙和任何其他事的答案
+    private String ultimateAnswer;
+
+    public ExampleBean(int years, String ultimateAnswer) {
+        this.years = years;
+        this.ultimateAnswer = ultimateAnswer;
+    }
+} 
+```
+      在上面这种情况下，使用type属性显式指定构造函数参数类型后，容器可以使用类型匹配
 
