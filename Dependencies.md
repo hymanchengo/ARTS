@@ -104,5 +104,47 @@ public class ExampleBean {
     }
 } 
 ```
+      **构造函数参数类型匹配**
       在上面这种情况下，使用type属性显式指定构造函数参数类型后，容器可以使用类型匹配
+```xml
+<beans>
+    <bean id="exampleBean" class="examples.ExampleBean">
+        <constructor-arg type="int" value="7500000"/>
+        <constructor-arg type="java.lang.String" value="42"/>
+    </bean>
+</beans>
+```
+      **构造函数参数索引**
+      可以使用index属性来显式指定构造函数参数的索引
+```xml
+<bean id="exampleBean" class="examples.ExampleBean">
+        <constructor-arg index="0" value="7500000">
+        <constructor-arg index="1" value="42">
+</bean>
+```
+      除了解决多个简单值的二义性外，指定index解决构造函数有相同类型的2个参数的二义性
+      
+      index是基于0的
+      
+      **构造函数参数名称**
+      可以使用构造函数参数名称来消除二义性
+```xml
+<bean id="exampleBean" class="examples.ExampleBean">
+        <constructor-arg name="years" value="7500000">
+        <constructor-arg name="ultimateAnswer" value="42">
+</bean>
+```
+      记住，要开箱即用，代码编译时必须启用debug标志，这样Spring可以从构造函数中查找名称。如果不想要开启
+      
+      debug标志编译代码，可以使用@ConstructorProperties JDK注解来显式命名构造函数参数
+      
+      看起来像下面这样
+ ```java
+ @ConstructorProperties({"years", "ultimateAnswer"})
+    public ExampleBean(int years, String ultimateAnswer) {
+        this.years = years;
+        this.ultimateAnswer = ultimateAnswer;
+    }
+ ```
+ 
 
