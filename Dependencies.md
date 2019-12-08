@@ -36,7 +36,24 @@
 - 变体
     
       1.基于构造函数的依赖注入
-      
+            通过容器调用多个参数的构造函数实现，每个参数代表一个依赖。
+            调用带有特定参数的静态工厂方法来构造bean几乎是等效的
+            这边认为构造函数和静态工厂方法的参数是相同的
+```java
+// 基于构造函数的依赖注入
+public class SimpleMovieLister {
+    
+    // SimpleMovieLister依赖MovieFinder
+    private MovieFinder movieFinder;
+
+    // 构造函数,Spring容器可以注入MovieFinder实例
+    public SimpleMovieLister(MovieFinder movieFinder) {
+        this.movieFinder = movieFinder;
+    }
+
+    //使用注入的MovieFinder的业务逻辑代码(略)
+}
+```
       2.基于Setter的依赖注入
       
 
