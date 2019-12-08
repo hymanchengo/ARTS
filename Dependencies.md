@@ -104,7 +104,7 @@ public class ExampleBean {
     }
 } 
 ```
-      **构造函数参数类型匹配**
+      ** 构造函数参数类型匹配 **
       在上面这种情况下，使用type属性显式指定构造函数参数类型后，容器可以使用类型匹配
 ```xml
 <beans>
@@ -114,7 +114,7 @@ public class ExampleBean {
     </bean>
 </beans>
 ```
-      **构造函数参数索引**
+      ** 构造函数参数索引 **
       可以使用index属性来显式指定构造函数参数的索引
 ```xml
 <bean id="exampleBean" class="examples.ExampleBean">
@@ -126,7 +126,7 @@ public class ExampleBean {
       
       index是基于0的
       
-      **构造函数参数名称**
+      ** 构造函数参数名称 **
       可以使用构造函数参数名称来消除二义性
 ```xml
 <bean id="exampleBean" class="examples.ExampleBean">
