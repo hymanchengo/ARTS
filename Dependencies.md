@@ -205,6 +205,11 @@ public class SimpleMovieLister {
       
 - 依赖解析过程
      容器执行bean的依赖解析如下：
+     - ApplicationContext创建并用描述了所有beans的配置metadata进行初始化。配置metadata可以被
+     
+     XML或Java代码或注解指定。
+     
+     - 
      
       
       
