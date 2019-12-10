@@ -217,10 +217,19 @@ public class SimpleMovieLister {
      
      Spring可以将以String格式提供的值转换成任何内置类型，比如int,long,String,boolean等。
      
+     创建容器时,Spring容器会验证每个bean的配置。然而bean的属性本身直到bean被创建时才会设定。
      
+     单例作用域的bean和被设定为预初始化(默认)的bean在容器创建时随之创建。作用域是定义在
      
-      
-      
+     Bean Scopes里的。其他情况下，当bean被用到时才会创建。一个bean的创建可能会引起一堆bean的创建，
+     
+     因为bean的依赖和依赖的依赖被创建和指定。注意这些依赖间的解析不匹配可能出现得较晚——就是在受影响bean第一次创建时
+     
+    **循环依赖**
+            
+            如果主要使用构造函数注入，可能会发生无法解决的循环依赖场景
+            
+            比如A类构造函数注入需要B类，B
 
 
 
