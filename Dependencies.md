@@ -259,8 +259,88 @@ public class SimpleMovieLister {
   单实例bean），它的依赖也设定了。相关的生命周期循环方法被调用（比如配置初始化方法或初始Bean回调方法）
             
   静态工厂方法的参数是由<constructor-arg/>元素提供的,和构造函数实际使用的时候是一模一样的
+  
+  工厂方法返回的类的类型不必和包含静态工厂方法的类的类型相同。一个实例（非静态）工厂方法可以以一种本质上相同的风格使用
+  
+  （除了使用factory-bean属性替代class属性）
+  
+### 依赖和配置的细节
+可以定义Bean属性和构造函数参数来引用其他被管理的bean,或行内定义的值。Spring基于XML配置的元数据支持在<property/>
+和<constructor-arg>内定义子元素类型可以达到这个目的。
+      
+直接的值（基本类型，Strings等等）
+<property/>元素的value属性以人类可读的字符串表示指定属性或构造函数参数。Spring的转换服务用来将这些值从String
 
+转换为属性或参数的实际类型。
+配置的3种方式
+```xml
+<bean id="myDataSource" class="org.apache.commons.dhcp.BasicDataSource" destroy-method="close">
+    <!--results in a setDriverClassName(String) call-->
+    <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+    <property name="url" value="jdbc:mysql://localhost:3306/mydb"/>
+    <property name="username" value="root"/>
+    <property name="password" value="masterkaoli"/>
+</bean>
 
+第二种
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:p="http://www.springframework.org/schema/p"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+ https://www.springframework.org/schema/beans/spring-beans.xsd">
+<bean id="myDataSource1" class="org.apache.commons.dhcp.BasicDataSource"
+destroy-method="close" p:driverClassName="com.mysql.jdbc.Driver"
+p:url="jdbc:mysql://localhost:3306/mydb"
+p:username="root"
+p:password="masterkaoli"
+/>
+</beans>
+
+第三种
+<bean id="mappings"
+class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
+<!-- typed as a java.util.Properties-->
+<property name="properties">
+    <value>
+        jdbc.driver.className=com.mysql.jdbc.Driver
+        jdbc.url=jdbc:mysql://localhost:3306/mydb
+    </value>
+</property>
+```
+第三种方式Spring容器会将<value/>元素里的文本转换为java.util.Properties实例，通过使用JavaBeans PropertyEditor机制
+
+。这是一个快捷入口，使为数不多的Spring团队确实喜欢使用内嵌value元素多过使用value属性风格的几处地方之一
+
+**idref元素**
+idref元素仅仅是一种防错措施，防止将容器内的另一个bean的id（字符串值，不是引用）传递给<constructor-arg/>
+
+或者<property/>元素。
+```xml
+<bean id="theTargetBean" class="..."/>
+
+<bean id="theClientBean" class="...">
+    <property name="targetName">
+        <idref bean="theTargetBean"/>
+    </property>
+</bean>
+
+<bean id="theTargetBean" class="..."/>
+<bean id="client" class="...">
+    <property name="targetName" value="theTargetBean"/>
+</bean>
+```
+上面这2段配置在运行其是等效的。但第一种优于第二种。因为使用idref tag使得容器在部署期进行验证
+
+它引用的命名的bean确实存在。第二个变种，没有验证传递给Client bean的targetName属性的值
+
+类型只会（很大可能是错误结构）在client bean实际初始化时发现。如果client beans是一个原型Bean
+
+这个类型和结果异常只能在容器部署很长时间后被发现。
  
+ 4.0 schema idref元素的local属性不再支持了，更改idref local为idref bean 当升级到4.0 schema时
+ 
+ idref元素带来价值的一个常见地方（至少在Spring 2.0版本前)是ProxyFactoryBean的bean定义里的AOP拦截器配置。
+ 
+当你指定拦截器的名字使用idref时会防止你错误地键入interceptor ID
  
 
