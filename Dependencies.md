@@ -258,7 +258,7 @@ public class SimpleMovieLister {
   这意味如果A依赖Bean B，Spring IoC容器在调用bean A的Setter方法前完全装配bean B。换句话说，bean已初始化好（如果不是预初始化的
   单实例bean），它的依赖也设定了。相关的生命周期循环方法被调用（比如配置初始化方法或初始Bean回调方法）
             
-
+  静态工厂方法的参数是由<constructor-arg/>元素提供的,和构造函数实际使用的时候是一模一样的
 
 
  
