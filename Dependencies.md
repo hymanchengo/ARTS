@@ -247,7 +247,16 @@ public class SimpleMovieLister {
   
   依赖时出现问题时会稍后产生异常。比如由于缺少属性或属性不合理，bean丢出异常。这潜在地推迟了一些配置问题的暴露。
   
-  这也是ApplicationContext实现为什么默认预初始化单例beans的原因。
+  这也是ApplicationContext实现为什么默认预初始化单例beans的原因。以一些前期时间和内存为代价在实际需要它们前
+  
+  创建这些beans，换来的是在ApplicationContext创建的时候就能发现配置问题而不是在后面。仍然可以改写这种默认行为让
+  
+  单例beans懒加载。
+  
+  当没有循环依赖存在时，一个或多个协作的beans被注入到依赖的bean里，每个协作bean在被注入到依赖的bean之前都是完全配置的
+  
+  这意味如果A依赖Bean B，Spring IoC容器在调用bean A的Setter方法前完全装配bean B。换句话说，bean已初始化好（如果不是预初始化的
+  单实例bean），它的依赖也设定了。相关的生命周期循环方法被调用（比如配置初始化方法或初始Bean回调方法）
             
 
 
