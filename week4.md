@@ -12,6 +12,8 @@
 
 ### Share 分享一篇有观点和思想的技术文章
 [Apache Hadoop Ecosystem](http://blog.newtechways.com/2017/10/apache-hadoop-ecosystem.html)
+
 我简单画了个脑图
+
 ![](hadoopeco.jpg)
 
