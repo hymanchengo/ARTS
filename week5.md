@@ -10,6 +10,7 @@
 
  
 ### Tip 学习至少一个技术技巧
+[dredd使用简介](https://github.com/hymanchengo/test/blob/master/dredd.md)
 
 
 ### Share 分享一篇有观点和思想的技术文章
