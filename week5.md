@@ -14,4 +14,4 @@
 
 
 ### Share 分享一篇有观点和思想的技术文章
-
+[Getting Started with GraphQL](https://davidwalsh.name/getting-started-with-graphql)
